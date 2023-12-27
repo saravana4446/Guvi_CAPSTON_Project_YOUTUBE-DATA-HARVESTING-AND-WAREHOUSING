@@ -529,11 +529,11 @@ question = st.selectbox("Please Select Your Question",
      "10. Videos with highest number of comments"))
 
 if question=="1. All the videos and the Channel Name":
-    query1 = '''select title as videos,channel_Name as channelName from videos'''
+    query1 = '''select title as videos,channel_name as channelname from videos'''
     cursor.execute(query1)
     mydb.commit()
     t1=cursor.fetchall()
-    df=pd.DataFrame(t1,columns=["video Title","channel Name"])
+    df=pd.DataFrame(t1,columns=["video title","channel name"])
     st.write(df)
 
 elif question=="2. Channels with most number of videos":
@@ -542,7 +542,7 @@ elif question=="2. Channels with most number of videos":
     cursor.execute(query2)
     mydb.commit()
     t2=cursor.fetchall()
-    df2=pd.DataFrame(t2,columns=["channelname","No of videos"])
+    df2=pd.DataFrame(t2,columns=["channel name","No of videos"])
     st.write(df2)
 
 elif question=="3. 10 most viewed videos":
@@ -555,15 +555,15 @@ elif question=="3. 10 most viewed videos":
     st.write(df3)
 
 elif question=="4. Comments in each video":
-    query4='''select Comments as no_comments ,title as videotitle from videos where comments is not null'''
+    query4='''select comments as no_comments,title as videotitle from videos where comments is not null'''
     cursor.execute(query4)
     mydb.commit()
     t4=cursor.fetchall()
-    df4=pd.DataFrame(t4,columns=["no Of Comments", "videotitle"])
+    df4=pd.DataFrame(t4,columns=["no Of comments", "videotitle"])
     st.write(df4)
 
 elif question=="5. Videos with highest likes":
-    query5='''select title as videotitle,channel_name as channelname,likes as likescount from videos 
+    query5='''select title as videotitle,channel_name as channelname,likes as likecount from videos 
                         where likes is not null order by likes desc'''
     cursor.execute(query5)
     mydb.commit()
@@ -576,7 +576,7 @@ elif question=="6. Likes of all videos":
     cursor.execute(query6)
     mydb.commit()
     t6=cursor.fetchall()
-    df6=pd.DataFrame(t6,columns=["videotitle","likecount"])
+    df6=pd.DataFrame(t6,columns=["likecount","videotitle"])
     st.write(df6)
 
 elif question=="7. Views of each channel":
@@ -584,7 +584,7 @@ elif question=="7. Views of each channel":
     cursor.execute(query7)
     mydb.commit()
     t7=cursor.fetchall()
-    df7=pd.DataFrame(t7,columns=["channel_name","videotitle"])
+    df7=pd.DataFrame(t7,columns=["channel name","totalviews"])
     st.write(df7)
 
 elif question=="8. Videos published in the year 2022":
@@ -605,8 +605,8 @@ elif question=="9. Average duration of all videos in each channel":
 
     T9=[]
     for index, row in df9.iterrows():
-        channel_title = row['channelname']
-        average_duration = row['averageduration']
+        channel_title = row["channelname"]
+        average_duration = row["averageduration"]
         average_duration_str = str(average_duration)
         T9.append(dict(channeltitle=channel_title ,avgduration=average_duration_str))
     df1=pd.DataFrame(T9)
